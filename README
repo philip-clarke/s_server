@@ -1,1 +1,13 @@
 A simple OTP application to test out some of OTP's features
+The s_server module is a gen_server which will respond with pong when it receives a ping
+
+To run the application, start erlang shell with:
+erl -pa ebin
+
+and in the shell enter
+1> application:start(s_server).
+ok
+2> s_server:ping().
+pong
+
+You can enter the shell command regs(). to get a list of all registered processes which will include s_server and s_server_sup

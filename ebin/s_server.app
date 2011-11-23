@@ -1,0 +1,8 @@
+{application,s_server,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {mod,{s_server_app,[]}},
+              {env,[]},
+              {modules,[s_server,s_server_app,s_server_sup]}]}.
