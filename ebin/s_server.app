@@ -5,4 +5,4 @@
               {applications,[kernel,stdlib]},
               {mod,{s_server_app,[]}},
               {env,[]},
-              {modules,[s_server,s_server_app,s_server_sup]}]}.
+              {modules,[s_server,s_server_app,s_server_sup,s_server_tests]}]}.
