@@ -43,6 +43,9 @@ start_link() ->
 ping() ->
         gen_server:call(?SERVER, ping).
 
+stop() ->
+        gen_server:cast(?SERVER, stop).
+
 %%%===================================================================
 %%% gen_server callbacks
 %%%===================================================================
@@ -91,8 +94,8 @@ handle_call(ping, _From, State) ->
 %%                                  {stop, Reason, State}
 %% @end
 %%--------------------------------------------------------------------
-handle_cast(_Msg, State) ->
-        {noreply, State}.
+handle_cast(Stop, State) ->
+        {stop, normal, State}.
 
 %%--------------------------------------------------------------------
 %% @private
