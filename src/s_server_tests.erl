@@ -18,13 +18,19 @@ basic_start_stop_test_() -> [
 
 start_stop_test_() -> {
     "Test that the server can be started, stopped and has a registered name",
-    ?setup(fun is_registered/1)
+    {setup,
+     fun start/0,
+     fun stop/1,
+     fun is_registered/1}
 }.
 
 
 ping_test_() -> {
     "Test that the response to ping is pong",
-    ?setup(fun response_with_pong/1)
+    {setup,
+     fun start/0,
+     fun stop/1,
+     fun response_with_pong/1}
 }.
 
 
@@ -33,11 +39,13 @@ ping_test_() -> {
 %%% SETUP FUNCTIONS %%%
 %%%%%%%%%%%%%%%%%%%%%%%
 start() ->
-    ?debugMsg("if I don't add this debugMsg macro, the tests will fail"),
+    %?debugMsg("if I don't add this debugMsg macro, the tests will fail"),
     {ok, Pid} = s_server:start_link(),
+    ?debugFmt("***** start ~p", [Pid]),
     Pid.
 
-stop(_Pid) ->
+stop(Pid) ->
+    ?debugFmt("***** stop ~p", [Pid]),
     s_server:stop().
 
  
