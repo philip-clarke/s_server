@@ -94,7 +94,7 @@ handle_call(ping, _From, State) ->
 %%                                  {stop, Reason, State}
 %% @end
 %%--------------------------------------------------------------------
-handle_cast(Stop, State) ->
+handle_cast(stop, State) ->
         {stop, normal, State}.
 
 %%--------------------------------------------------------------------

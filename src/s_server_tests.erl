@@ -30,7 +30,7 @@ ping_test_() -> {
     {setup,
      fun start/0,
      fun stop/1,
-     fun response_with_pong/1}
+     fun respond_with_pong/1}
 }.
 
 
@@ -39,14 +39,16 @@ ping_test_() -> {
 %%% SETUP FUNCTIONS %%%
 %%%%%%%%%%%%%%%%%%%%%%%
 start() ->
-    %?debugMsg("if I don't add this debugMsg macro, the tests will fail"),
     {ok, Pid} = s_server:start_link(),
-    ?debugFmt("***** start ~p", [Pid]),
     Pid.
 
+wait_for_exit(Pid) ->
+    MRef = erlang:monitor(process, Pid),
+    receive {'DOWN', MRef, _, _, _} -> ok end.
+
 stop(Pid) ->
-    ?debugFmt("***** stop ~p", [Pid]),
-    s_server:stop().
+    s_server:stop(),
+    wait_for_exit(Pid).
 
  
 %%%%%%%%%%%%%%%%%%%%
@@ -56,7 +58,7 @@ is_registered(Pid) ->
     [?_assert(erlang:is_process_alive(Pid)),
      ?_assertEqual(Pid, whereis(s_server))].
 
-response_with_pong(_Pid) ->
+respond_with_pong(Pid) ->
     Result = s_server:ping(),
     [?_assertEqual(pong, Result)].
  
