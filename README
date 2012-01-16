@@ -13,13 +13,9 @@ pong
 You can enter the shell command regs(). to get a list of all registered processes which will include s_server and s_server_sup
 
 
-To test the s_server, start erlang shell with
-erl -pa ebin
-
-and in the shell enter
-1> eunit:test(s_server).
-  Test passed.
-ok
+%% Running tests
+To test the s_server use rebar from the command line
+./rebar eunit
 
 
 %% Analyse using dialyzer
